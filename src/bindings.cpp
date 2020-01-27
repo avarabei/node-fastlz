@@ -11,7 +11,7 @@
 
 NAN_METHOD(CompressSync) {
   if (info.Length() == 1 && node::Buffer::HasInstance(info[0])) {
-    v8::Local<v8::Object> sourceObject = info[0]->ToObject();
+    v8::Local<v8::Object> sourceObject = Nan::To<v8::Object>(info[0]).ToLocalChecked();
     void* source = static_cast<void*>(node::Buffer::Data(sourceObject));
 
     size_t dataLength = node::Buffer::Length(info[0]);
@@ -39,7 +39,7 @@ NAN_METHOD(CompressSync) {
 
 NAN_METHOD(DecompressSync) {
     if (info.Length() == 1 && node::Buffer::HasInstance(info[0])) {
-        v8::Local<v8::Object> sourceObject = info[0]->ToObject();
+        v8::Local<v8::Object> sourceObject = Nan::To<v8::Object>(info[0]).ToLocalChecked();
         void* source = static_cast<void*>(node::Buffer::Data(sourceObject));
 
         uint32_t dataLength = node::Buffer::Length(info[0]);
